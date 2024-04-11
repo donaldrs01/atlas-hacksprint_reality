@@ -54,55 +54,60 @@
     Source: The Onion
     True/False: False
 
-15)  Headline: "Gluten-Free Pancake Mix Just a Bag of Sand"
-    Source: The Onion
-    True/False: False
-
-16)  Headline: "U.S. Open Delayed After Protester Glued Bare Feet to Floor"
+15)  Headline: "U.S. Open Delayed After Protester Glued Bare Feet to Floor"
     Source: NBC News
     True/False: True
 
-17)  Headline: "309 people shine in sun costumes at Niagara Falls on eclipse day"
+16)  Headline: "309 people shine in sun costumes at Niagara Falls on eclipse day"
     Source: CTV News
     True/False: True
 
-18)  Headline: "Staff at a Virginia wildlife center pretend to be red foxes as they care for an orphaned kit"
+17)  Headline: "Staff at a Virginia wildlife center pretend to be red foxes as they care for an orphaned kit"
     Source: AP News
     True/False: True
 
-19)  Headline: "Porch Pirate Dresses Up As Trash Bag To Steal Package Worth $10"
+18)  Headline: "Porch Pirate Dresses Up As Trash Bag To Steal Package Worth $10"
     Source: HuffPost
     True/False: True
 
-20)  Headline: "Doctors Remove 150 Live Bugs From Florida Man's Nose"
+19)  Headline: "Doctors Remove 150 Live Bugs From Florida Man's Nose"
     Source: New York Post
     True/False: True
 
-21)  Headline: "Alabama Radio Station Off The Air After 200-Foot Radio Tower Is Stolen"
+20)  Headline: "Alabama Radio Station Off The Air After 200-Foot Radio Tower Is Stolen"
     Source: NBC News
     True/False: True
 
-22)  Headline: "Utah Teen Facing Charges After Allegedly Taping Fish To ATMs"
+21)  Headline: "Utah Teen Facing Charges After Allegedly Taping Fish To ATMs"
     Source: Yahoo News
     True/False: True
 
-23)  Headline: "Police officer goes viral after chasing, tackling pig during neighborhood escapade: 'Not my first rodeo'"
+22)  Headline: "Police officer goes viral after chasing, tackling pig during neighborhood escapade: 'Not my first rodeo'"
     Source: Fox News
     True/False: True
 
-24)  Headline: "Sausage vending machines booming in Germany"
+23)  Headline: "Sausage vending machines booming in Germany"
     Source: The Independent
     True/False: True
 
-26)  Headline: "Chechnya 'bans music that is too fast or too slow'"
+24)  Headline: "Chechnya 'bans music that is too fast or too slow'"
     Source: Sky News
     True/False: True
 
-27)  Headline: "Frogs are screaming - we just can't hear them"
+25)  Headline: "Frogs are screaming - we just can't hear them"
     Source: Sky News
     True/False: True
 
-28)  Headline: "Trillions of cicadas to emerge across US"
+26)  Headline: "Trillions of cicadas to emerge across US"
     Source: Sky News
     True/False: True
+
+27)  Headline: "Hundreds of pounds of cooked pasta mysteriously dumped in New Jersey woods"
+    Source: CBS News
+    True/False: True
+
+28)  Headline: "California girl gets license to own a unicorn"
+    Source: CBS News
+    True/False: True
+
 

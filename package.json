@@ -1,0 +1,27 @@
+{
+  "name": "atlas-hacksprint_reality",
+  "version": "1.0.0",
+  "description": "Project work related to our web application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/donaldrs01/atlas-hacksprint_reality.git"
+  },
+  "keywords": [
+    "hacksprint",
+    "atlas",
+    "reality"
+  ],
+  "author": "Ryan Donaldson, Jess Dison, Luke Schula",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/donaldrs01/atlas-hacksprint_reality/issues"
+  },
+  "homepage": "https://github.com/donaldrs01/atlas-hacksprint_reality#readme",
+  "dependencies": {
+    "firebase": "^10.11.0"
+  }
+}

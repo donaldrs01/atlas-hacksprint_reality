@@ -1,4 +1,5 @@
 from flask import Flask
+from firebase_admin import firestore
 import os
 
 app = Flask(__name__)

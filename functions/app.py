@@ -1,8 +1,16 @@
 from flask import Flask
-from firebase_admin import firestore
+import firebase_admin
+from firebase_admin import firestore, credentials
 import os
 
 app = Flask(__name__)
+
+# Initialize Firebase SDK (developer kit) and load credentials
+cred = credentials.Certificate("../key.json")
+firebase_admin.initialize_app(cred)
+
+# Initialize Firestore allowing DB access
+db = firestore.client()
 
 @app.route('/')
 def index():

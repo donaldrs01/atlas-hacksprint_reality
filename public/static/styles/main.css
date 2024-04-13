@@ -1,0 +1,25 @@
+/* styles.css */
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 75vh;
+}
+
+#startButton {
+  background-color: #01ccff;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 15px 25px;
+  font-size: 20px;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+#startButton:hover {
+  background-color: #043074;
+}

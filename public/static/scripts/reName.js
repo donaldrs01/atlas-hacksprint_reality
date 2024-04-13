@@ -49,8 +49,8 @@ function generateStoryHTML(story) {
 
 // Function to handle clicks on story containers
 function handleStoryClick() {
-    // Show the start button
-    document.getElementById("startButton").style.display = "block";
+    // Show the "Try again" button
+    document.getElementById("tryAgainButton").style.display = "block";
 
     // Hide the story containers
     document.getElementById("trueStoryContainer").style.display = "none";
@@ -65,4 +65,13 @@ document.getElementById("startButton").addEventListener("click", function() {
 // Show the start button when the page loads
 document.addEventListener('DOMContentLoaded', function() {
   document.getElementById("startButton").style.display = "block";
+});
+
+// Event listener for the "Try again" button
+document.getElementById("tryAgainButton").addEventListener("click", function() {
+  // Show the start button
+  document.getElementById("startButton").style.display = "block";
+
+  // Hide the "Try again" button
+  this.style.display = "none";
 });

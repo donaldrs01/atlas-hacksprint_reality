@@ -25,6 +25,14 @@ function decisionButtons() {
 
   // Hide the start button
   document.getElementById("startButton").style.display = "none";
+    
+  // Display the decision buttons
+  trueStoryContainer.style.display = "block";
+  falseStoryContainer.style.display = "block";
+
+  // Add event listener to story containers
+  trueStoryContainer.addEventListener('click', handleStoryClick);
+  falseStoryContainer.addEventListener('click', handleStoryClick);
 }
 
 // Function to generate HTML for a story
@@ -37,6 +45,16 @@ function generateStoryHTML(story) {
           </div>
       </div>
   `;
+}
+
+// Function to handle clicks on story containers
+function handleStoryClick() {
+    // Show the start button
+    document.getElementById("startButton").style.display = "block";
+
+    // Hide the story containers
+    document.getElementById("trueStoryContainer").style.display = "none";
+    document.getElementById("falseStoryContainer").style.display = "none";
 }
 
 // Event listener for the Start Quiz button

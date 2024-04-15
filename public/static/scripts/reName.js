@@ -1,38 +1,71 @@
+console.log('JS loaded in!')
+
+import { initializeApp } from "firebase/app";
+import {
+  getFirestore, collection, query, where, getDocs,
+  getDoc
+} from 'firebase/firestore';
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyBxKUXPlej5myONnx6nah0U5Ffk794adCg",
+    authDomain: "reality-check-17ece.firebaseapp.com",
+    projectId: "reality-check-17ece",
+    storageBucket: "reality-check-17ece.appspot.com",
+    messagingSenderId: "693584044894",
+    appId: "1:693584044894:web:ceda2d0bc31213b4eae5cf",
+    measurementId: "G-HGVPY1BF6R"
+  };
+
+//init firebase app with project settings
+const firebaseApp = initializeApp(firebaseConfig);
+console.log('Firebase initialized!')
+
+//init Firestore database
+const db = getFirestore(firebaseApp)
+
 // Function to populate true and false stories
-function decisionButtons() {
-  
-  
-  // Hardcoded story data
-  const trueStory = {
-      title: "COVID-19 Vaccine Development",
-      description: "Scientists have successfully developed a highly effective COVID-19 vaccine with minimal side effects."
-  };
+async function decisionButtons() {
+  try {
+    // Fetch true story from Firestore DB
+    const trueStoryQuery = await getDocs(query(collection(db, 'headlines'), where ('real_or_fake', '==', true )));
+    const trueStories = [];
+    trueStoryQuery.forEach(doc => {
+      trueStories.push(doc.data());
+    });
+    //Fetch fake story from DB
+    const falseStoryQuery = await getDocs(query(collection(db, 'headlines'), where ('real_or_fake', '==', false)));
+    const falseStories = [];
+    falseStoryQuery.forEach(doc => {
+      falseStories.push(doc.data());
+    });
 
-  const falseStory = {
-      title: "Alien Invasion Confirmed",
-      description: "Reports of an alien invasion have been confirmed by government officials."
-  };
-
-  // Get references to true and false story containers
-  const trueStoryContainer = document.getElementById("trueStoryContainer");
-  const falseStoryContainer = document.getElementById("falseStoryContainer");
-
-  // Display true story container
-  trueStoryContainer.innerHTML = generateStoryHTML(trueStory);
-
-  // Display false story container
-  falseStoryContainer.innerHTML = generateStoryHTML(falseStory);
-
-  // Hide the start button
-  document.getElementById("startButton").style.display = "none";
+    // Choose random story from trueStories and falseStories arrays
+    const randomTrueStory = trueStories[Math.floor(Math.random() * trueStories.length)];
+    const randomFalseStory = falseStories[Math.floor(Math.random() * falseStories.length)];
     
-  // Display the decision buttons
-  trueStoryContainer.style.display = "block";
-  falseStoryContainer.style.display = "block";
-
-  // Add event listener to story containers
-  trueStoryContainer.addEventListener('click', handleStoryClick);
-  falseStoryContainer.addEventListener('click', handleStoryClick);
+    // Get references to true and false story containers
+    const trueStoryContainer = document.getElementById("trueStoryContainer");
+    const falseStoryContainer = document.getElementById("falseStoryContainer");
+    
+    // Display true story container
+    trueStoryContainer.innerHTML = generateStoryHTML(randomTrueStory);
+    
+    // Display false story container
+    falseStoryContainer.innerHTML = generateStoryHTML(randomFalseStory);
+    
+    // Hide the start button
+    document.getElementById("startButton").style.display = "none";
+    
+    // Display the decision buttons
+    trueStoryContainer.style.display = "block";
+    falseStoryContainer.style.display = "block";
+    
+    // Add event listener to story containers
+    trueStoryContainer.addEventListener('click', handleStoryClick);
+    falseStoryContainer.addEventListener('click', handleStoryClick);
+} catch (error) {
+  console.error('Error fetching stories:', error);
 }
 
 // Function to generate HTML for a story
@@ -70,8 +103,10 @@ document.addEventListener('DOMContentLoaded', function() {
 // Event listener for the "Try again" button
 document.getElementById("tryAgainButton").addEventListener("click", function() {
   // Show the start button
+  decisionButtons();
   document.getElementById("startButton").style.display = "block";
 
   // Hide the "Try again" button
   this.style.display = "none";
 });
+}

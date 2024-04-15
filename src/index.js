@@ -1,9 +1,9 @@
-console.log('hey from src index.js')
+console.log('JS loaded in and Firestore intialized!')
 import { initializeApp } from "firebase/app";
 import {
   getFirestore, collection, query, where, getDocs,
   getDoc
-} from 'firebase/firestore'
+} from 'firebase/firestore';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -17,25 +17,32 @@ const firebaseConfig = {
   };
 
 //init firebase app with project settings
-initializeApp(firebaseConfig)
+const firebaseApp = initializeApp(firebaseConfig);
 
-//init services
-const db = getFirestore()
+//init Firestore database
+const db = getFirestore(firebaseApp)
 
-//Query for fake news articles
-const qFakenews = query(collection(db, 'headlines'), where('real_or_fake', '==', false));
-const qFakenews_snap = await getDocs (qFakenews);
-qFakenews_snap.forEach((doc) => {
-  console.log(doc.id, ' => ', doc.data());
-})
+/*
+async function fetchNewsArticles() {
+  try {
+    //Query for fake news articles
+    const qFakenews = query(collection(db, 'headlines'), where('real_or_fake', '==', false));
+    const qFakeNewsSnap = await getDocs (qFakenews);
+    qFakeNewsSnap.forEach((doc) => {
+      console.log(doc.id, ' => ', doc.data());
+  });
+  
+    //Query for real news articles
+    const qRealnews = query(collection(db, 'headlines'), where('real_or_fake', '==', true));
+    const qRealNewsSnap = await getDocs (qRealnews);
+    qRealNewsSnap.forEach((doc) => {
+      console.log(doc.id, ' => ', doc.data());
+    });
+  } catch (error) {
+    console.error("Error retrieving headline:", error);
+}
+}
 
-//Query for real news articles
-const qRealnews = query(collection(db, 'headlines'), where('real_or_fake', '==', true));
-const qRealnews_snap = await getDocs (qRealnews);
-qRealnews_snap.forEach((doc) => {
-  console.log(doc.id, ' => ', doc.data());
-})
-
-
-  .catch(err.message)
-    console.log(err.message)
+// Call function to fetch headlines
+fetchNewsArticles();
+*/

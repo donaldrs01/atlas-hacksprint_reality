@@ -5,11 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!--Add firebase/firebase features from provided index.html file that we need-->
-
+  <script src="https://www.gstatic.com/firebasejs/9.0.1/firebase-app.js" type="module"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.0.1/firebase-firestore.js" type="module"></script>
+  <!--ADD JS bundle -->
+  <script type="module" src="../bundle.js"></script>
+  <!--JavaScript file-->
+  <script type="module" src="../static/scripts/reName.js"></script>
   <!--Import Bootstrap-->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <!--Import style sheets-->
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="../static/styles/main.css">
   <!--Title-->
   <title>Reality Check</title>
 
@@ -43,8 +48,6 @@
 <!-- Try again button -->
 <button id="tryAgainButton" style="display: none;">Try again?</button>
 
-<!--JavaScript file-->
-<script src="script.js"></script>
 
 <!--Footer-->
 

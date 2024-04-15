@@ -2,7 +2,8 @@
   "name": "atlas-hacksprint_reality",
   "version": "1.0.0",
   "description": "Project work related to our web application",
-  "main": "index.js",
+  "main": "./public/static/scripts/reName.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack"

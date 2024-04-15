@@ -30,16 +30,6 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
-/***/ "./src/index.js":
-/*!**********************!*\
-  !*** ./src/index.js ***!
-  \**********************/
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {\n__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/app */ \"./node_modules/firebase/app/dist/esm/index.esm.js\");\n/* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/firestore */ \"./node_modules/firebase/firestore/dist/esm/index.esm.js\");\nconsole.log('hey from src index.js')\r\n;\r\n\r\n\r\n// Your web app's Firebase configuration\r\nconst firebaseConfig = {\r\n    apiKey: \"AIzaSyBxKUXPlej5myONnx6nah0U5Ffk794adCg\",\r\n    authDomain: \"reality-check-17ece.firebaseapp.com\",\r\n    projectId: \"reality-check-17ece\",\r\n    storageBucket: \"reality-check-17ece.appspot.com\",\r\n    messagingSenderId: \"693584044894\",\r\n    appId: \"1:693584044894:web:ceda2d0bc31213b4eae5cf\",\r\n    measurementId: \"G-HGVPY1BF6R\"\r\n  };\r\n\r\n//init firebase app with project settings\r\n(0,firebase_app__WEBPACK_IMPORTED_MODULE_0__.initializeApp)(firebaseConfig)\r\n\r\n//init services\r\nconst db = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)()\r\n\r\n//Query for fake news articles\r\nconst qFakenews = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.query)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)(db, 'headlines'), (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.where)('real_or_fake', '==', false));\r\nconst qFakenews_snap = await (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getDocs) (qFakenews);\r\nqFakenews_snap.forEach((doc) => {\r\n  console.log(doc.id, ' => ', doc.data());\r\n})\r\n\r\n//Query for real news articles\r\nconst qRealnews = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.query)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)(db, 'headlines'), (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.where)('real_or_fake', '==', true));\r\nconst qRealnews_snap = await (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getDocs) (qRealnews);\r\nqRealnews_snap.forEach((doc) => {\r\n  console.log(doc.id, ' => ', doc.data());\r\n})\r\n\r\n\r\n  .catch(err.message)\r\n    console.log(err.message)\n__webpack_async_result__();\n} catch(e) { __webpack_async_result__(e); } }, 1);\n\n//# sourceURL=webpack://atlas-hacksprint_reality/./src/index.js?");
-
-/***/ }),
-
 /***/ "./node_modules/@firebase/app/dist/esm/index.esm2017.js":
 /*!**************************************************************!*\
   !*** ./node_modules/@firebase/app/dist/esm/index.esm2017.js ***!
@@ -118,6 +108,16 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   a: () => (/* binding */ reverseTransformCache),\n/* harmony export */   i: () => (/* binding */ instanceOfAny),\n/* harmony export */   r: () => (/* binding */ replaceTraps),\n/* harmony export */   u: () => (/* binding */ unwrap),\n/* harmony export */   w: () => (/* binding */ wrap)\n/* harmony export */ });\nconst instanceOfAny = (object, constructors) => constructors.some((c) => object instanceof c);\n\nlet idbProxyableTypes;\nlet cursorAdvanceMethods;\n// This is a function to prevent it throwing up in node environments.\nfunction getIdbProxyableTypes() {\n    return (idbProxyableTypes ||\n        (idbProxyableTypes = [\n            IDBDatabase,\n            IDBObjectStore,\n            IDBIndex,\n            IDBCursor,\n            IDBTransaction,\n        ]));\n}\n// This is a function to prevent it throwing up in node environments.\nfunction getCursorAdvanceMethods() {\n    return (cursorAdvanceMethods ||\n        (cursorAdvanceMethods = [\n            IDBCursor.prototype.advance,\n            IDBCursor.prototype.continue,\n            IDBCursor.prototype.continuePrimaryKey,\n        ]));\n}\nconst cursorRequestMap = new WeakMap();\nconst transactionDoneMap = new WeakMap();\nconst transactionStoreNamesMap = new WeakMap();\nconst transformCache = new WeakMap();\nconst reverseTransformCache = new WeakMap();\nfunction promisifyRequest(request) {\n    const promise = new Promise((resolve, reject) => {\n        const unlisten = () => {\n            request.removeEventListener('success', success);\n            request.removeEventListener('error', error);\n        };\n        const success = () => {\n            resolve(wrap(request.result));\n            unlisten();\n        };\n        const error = () => {\n            reject(request.error);\n            unlisten();\n        };\n        request.addEventListener('success', success);\n        request.addEventListener('error', error);\n    });\n    promise\n        .then((value) => {\n        // Since cursoring reuses the IDBRequest (*sigh*), we cache it for later retrieval\n        // (see wrapFunction).\n        if (value instanceof IDBCursor) {\n            cursorRequestMap.set(value, request);\n        }\n        // Catching to avoid \"Uncaught Promise exceptions\"\n    })\n        .catch(() => { });\n    // This mapping exists in reverseTransformCache but doesn't doesn't exist in transformCache. This\n    // is because we create many promises from a single IDBRequest.\n    reverseTransformCache.set(promise, request);\n    return promise;\n}\nfunction cacheDonePromiseForTransaction(tx) {\n    // Early bail if we've already created a done promise for this transaction.\n    if (transactionDoneMap.has(tx))\n        return;\n    const done = new Promise((resolve, reject) => {\n        const unlisten = () => {\n            tx.removeEventListener('complete', complete);\n            tx.removeEventListener('error', error);\n            tx.removeEventListener('abort', error);\n        };\n        const complete = () => {\n            resolve();\n            unlisten();\n        };\n        const error = () => {\n            reject(tx.error || new DOMException('AbortError', 'AbortError'));\n            unlisten();\n        };\n        tx.addEventListener('complete', complete);\n        tx.addEventListener('error', error);\n        tx.addEventListener('abort', error);\n    });\n    // Cache it for later retrieval.\n    transactionDoneMap.set(tx, done);\n}\nlet idbProxyTraps = {\n    get(target, prop, receiver) {\n        if (target instanceof IDBTransaction) {\n            // Special handling for transaction.done.\n            if (prop === 'done')\n                return transactionDoneMap.get(target);\n            // Polyfill for objectStoreNames because of Edge.\n            if (prop === 'objectStoreNames') {\n                return target.objectStoreNames || transactionStoreNamesMap.get(target);\n            }\n            // Make tx.store return the only store in the transaction, or undefined if there are many.\n            if (prop === 'store') {\n                return receiver.objectStoreNames[1]\n                    ? undefined\n                    : receiver.objectStore(receiver.objectStoreNames[0]);\n            }\n        }\n        // Else transform whatever we get back.\n        return wrap(target[prop]);\n    },\n    set(target, prop, value) {\n        target[prop] = value;\n        return true;\n    },\n    has(target, prop) {\n        if (target instanceof IDBTransaction &&\n            (prop === 'done' || prop === 'store')) {\n            return true;\n        }\n        return prop in target;\n    },\n};\nfunction replaceTraps(callback) {\n    idbProxyTraps = callback(idbProxyTraps);\n}\nfunction wrapFunction(func) {\n    // Due to expected object equality (which is enforced by the caching in `wrap`), we\n    // only create one new func per func.\n    // Edge doesn't support objectStoreNames (booo), so we polyfill it here.\n    if (func === IDBDatabase.prototype.transaction &&\n        !('objectStoreNames' in IDBTransaction.prototype)) {\n        return function (storeNames, ...args) {\n            const tx = func.call(unwrap(this), storeNames, ...args);\n            transactionStoreNamesMap.set(tx, storeNames.sort ? storeNames.sort() : [storeNames]);\n            return wrap(tx);\n        };\n    }\n    // Cursor methods are special, as the behaviour is a little more different to standard IDB. In\n    // IDB, you advance the cursor and wait for a new 'success' on the IDBRequest that gave you the\n    // cursor. It's kinda like a promise that can resolve with many values. That doesn't make sense\n    // with real promises, so each advance methods returns a new promise for the cursor object, or\n    // undefined if the end of the cursor has been reached.\n    if (getCursorAdvanceMethods().includes(func)) {\n        return function (...args) {\n            // Calling the original function with the proxy as 'this' causes ILLEGAL INVOCATION, so we use\n            // the original object.\n            func.apply(unwrap(this), args);\n            return wrap(cursorRequestMap.get(this));\n        };\n    }\n    return function (...args) {\n        // Calling the original function with the proxy as 'this' causes ILLEGAL INVOCATION, so we use\n        // the original object.\n        return wrap(func.apply(unwrap(this), args));\n    };\n}\nfunction transformCachableValue(value) {\n    if (typeof value === 'function')\n        return wrapFunction(value);\n    // This doesn't return, it just creates a 'done' promise for the transaction,\n    // which is later returned for transaction.done (see idbObjectHandler).\n    if (value instanceof IDBTransaction)\n        cacheDonePromiseForTransaction(value);\n    if (instanceOfAny(value, getIdbProxyableTypes()))\n        return new Proxy(value, idbProxyTraps);\n    // Return the same value back if we're not going to transform it.\n    return value;\n}\nfunction wrap(value) {\n    // We sometimes generate multiple promises from a single IDBRequest (eg when cursoring), because\n    // IDB is weird and a single IDBRequest can yield many responses, so these can't be cached.\n    if (value instanceof IDBRequest)\n        return promisifyRequest(value);\n    // If we've already transformed this value before, reuse the transformed value.\n    // This is faster, but it also provides object equality.\n    if (transformCache.has(value))\n        return transformCache.get(value);\n    const newValue = transformCachableValue(value);\n    // Not all types are transformed.\n    // These may be primitive types, so they can't be WeakMap keys.\n    if (newValue !== value) {\n        transformCache.set(value, newValue);\n        reverseTransformCache.set(newValue, value);\n    }\n    return newValue;\n}\nconst unwrap = (value) => reverseTransformCache.get(value);\n\n\n\n\n//# sourceURL=webpack://atlas-hacksprint_reality/./node_modules/idb/build/wrap-idb-value.js?");
 
+/***/ }),
+
+/***/ "./public/static/scripts/reName.js":
+/*!*****************************************!*\
+  !*** ./public/static/scripts/reName.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/app */ \"./node_modules/firebase/app/dist/esm/index.esm.js\");\n/* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/firestore */ \"./node_modules/firebase/firestore/dist/esm/index.esm.js\");\nconsole.log('JS loaded in!')\r\n\r\n;\r\n\r\n\r\n// Your web app's Firebase configuration\r\nconst firebaseConfig = {\r\n    apiKey: \"AIzaSyBxKUXPlej5myONnx6nah0U5Ffk794adCg\",\r\n    authDomain: \"reality-check-17ece.firebaseapp.com\",\r\n    projectId: \"reality-check-17ece\",\r\n    storageBucket: \"reality-check-17ece.appspot.com\",\r\n    messagingSenderId: \"693584044894\",\r\n    appId: \"1:693584044894:web:ceda2d0bc31213b4eae5cf\",\r\n    measurementId: \"G-HGVPY1BF6R\"\r\n  };\r\n\r\n//init firebase app with project settings\r\nconst firebaseApp = (0,firebase_app__WEBPACK_IMPORTED_MODULE_0__.initializeApp)(firebaseConfig);\r\nconsole.log('Firebase initialized!')\r\n\r\n//init Firestore database\r\nconst db = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(firebaseApp)\r\n\r\n// Function to populate true and false stories\r\nasync function decisionButtons() {\r\n  try {\r\n    // Fetch true story from Firestore DB\r\n    const trueStoryQuery = await (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getDocs)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.query)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)(db, 'headlines'), (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.where) ('real_or_fake', '==', true )));\r\n    const trueStories = [];\r\n    trueStoryQuery.forEach(doc => {\r\n      trueStories.push(doc.data());\r\n    });\r\n    //Fetch fake story from DB\r\n    const falseStoryQuery = await (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getDocs)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.query)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)(db, 'headlines'), (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.where) ('real_or_fake', '==', false)));\r\n    const falseStories = [];\r\n    falseStoryQuery.forEach(doc => {\r\n      falseStories.push(doc.data());\r\n    });\r\n\r\n    // Choose random story from trueStories and falseStories arrays\r\n    const randomTrueStory = trueStories[Math.floor(Math.random() * trueStories.length)];\r\n    const randomFalseStory = falseStories[Math.floor(Math.random() * falseStories.length)];\r\n    \r\n    // Get references to true and false story containers\r\n    const trueStoryContainer = document.getElementById(\"trueStoryContainer\");\r\n    const falseStoryContainer = document.getElementById(\"falseStoryContainer\");\r\n    \r\n    // Display true story container\r\n    trueStoryContainer.innerHTML = generateStoryHTML(randomTrueStory);\r\n    \r\n    // Display false story container\r\n    falseStoryContainer.innerHTML = generateStoryHTML(randomFalseStory);\r\n    \r\n    // Hide the start button\r\n    document.getElementById(\"startButton\").style.display = \"none\";\r\n    \r\n    // Display the decision buttons\r\n    trueStoryContainer.style.display = \"block\";\r\n    falseStoryContainer.style.display = \"block\";\r\n    \r\n    // Add event listener to story containers\r\n    trueStoryContainer.addEventListener('click', handleStoryClick);\r\n    falseStoryContainer.addEventListener('click', handleStoryClick);\r\n} catch (error) {\r\n  console.error('Error fetching stories:', error);\r\n}\r\n\r\n// Function to generate HTML for a story\r\nfunction generateStoryHTML(story) {\r\n  return `\r\n      <div class=\"card\">\r\n          <div class=\"card-body\">\r\n              <h5 class=\"card-title\">${story.title}</h5>\r\n              <p class=\"card-text\">${story.description}</p>\r\n          </div>\r\n      </div>\r\n  `;\r\n}\r\n\r\n// Function to handle clicks on story containers\r\nfunction handleStoryClick() {\r\n    // Show the \"Try again\" button\r\n    document.getElementById(\"tryAgainButton\").style.display = \"block\";\r\n\r\n    // Hide the story containers\r\n    document.getElementById(\"trueStoryContainer\").style.display = \"none\";\r\n    document.getElementById(\"falseStoryContainer\").style.display = \"none\";\r\n}\r\n\r\n// Event listener for the Start Quiz button\r\ndocument.getElementById(\"startButton\").addEventListener(\"click\", function() {\r\n  decisionButtons();\r\n});\r\n\r\n// Show the start button when the page loads\r\ndocument.addEventListener('DOMContentLoaded', function() {\r\n  document.getElementById(\"startButton\").style.display = \"block\";\r\n});\r\n\r\n// Event listener for the \"Try again\" button\r\ndocument.getElementById(\"tryAgainButton\").addEventListener(\"click\", function() {\r\n  // Show the start button\r\n  decisionButtons();\r\n  document.getElementById(\"startButton\").style.display = \"block\";\r\n\r\n  // Hide the \"Try again\" button\r\n  this.style.display = \"none\";\r\n});\r\n}\r\n\n\n//# sourceURL=webpack://atlas-hacksprint_reality/./public/static/scripts/reName.js?");
+
 /***/ })
 
 /******/ 	});
@@ -147,75 +147,6 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 	}
 /******/ 	
 /************************************************************************/
-/******/ 	/* webpack/runtime/async module */
-/******/ 	(() => {
-/******/ 		var webpackQueues = typeof Symbol === "function" ? Symbol("webpack queues") : "__webpack_queues__";
-/******/ 		var webpackExports = typeof Symbol === "function" ? Symbol("webpack exports") : "__webpack_exports__";
-/******/ 		var webpackError = typeof Symbol === "function" ? Symbol("webpack error") : "__webpack_error__";
-/******/ 		var resolveQueue = (queue) => {
-/******/ 			if(queue && queue.d < 1) {
-/******/ 				queue.d = 1;
-/******/ 				queue.forEach((fn) => (fn.r--));
-/******/ 				queue.forEach((fn) => (fn.r-- ? fn.r++ : fn()));
-/******/ 			}
-/******/ 		}
-/******/ 		var wrapDeps = (deps) => (deps.map((dep) => {
-/******/ 			if(dep !== null && typeof dep === "object") {
-/******/ 				if(dep[webpackQueues]) return dep;
-/******/ 				if(dep.then) {
-/******/ 					var queue = [];
-/******/ 					queue.d = 0;
-/******/ 					dep.then((r) => {
-/******/ 						obj[webpackExports] = r;
-/******/ 						resolveQueue(queue);
-/******/ 					}, (e) => {
-/******/ 						obj[webpackError] = e;
-/******/ 						resolveQueue(queue);
-/******/ 					});
-/******/ 					var obj = {};
-/******/ 					obj[webpackQueues] = (fn) => (fn(queue));
-/******/ 					return obj;
-/******/ 				}
-/******/ 			}
-/******/ 			var ret = {};
-/******/ 			ret[webpackQueues] = x => {};
-/******/ 			ret[webpackExports] = dep;
-/******/ 			return ret;
-/******/ 		}));
-/******/ 		__webpack_require__.a = (module, body, hasAwait) => {
-/******/ 			var queue;
-/******/ 			hasAwait && ((queue = []).d = -1);
-/******/ 			var depQueues = new Set();
-/******/ 			var exports = module.exports;
-/******/ 			var currentDeps;
-/******/ 			var outerResolve;
-/******/ 			var reject;
-/******/ 			var promise = new Promise((resolve, rej) => {
-/******/ 				reject = rej;
-/******/ 				outerResolve = resolve;
-/******/ 			});
-/******/ 			promise[webpackExports] = exports;
-/******/ 			promise[webpackQueues] = (fn) => (queue && fn(queue), depQueues.forEach(fn), promise["catch"](x => {}));
-/******/ 			module.exports = promise;
-/******/ 			body((deps) => {
-/******/ 				currentDeps = wrapDeps(deps);
-/******/ 				var fn;
-/******/ 				var getResult = () => (currentDeps.map((d) => {
-/******/ 					if(d[webpackError]) throw d[webpackError];
-/******/ 					return d[webpackExports];
-/******/ 				}))
-/******/ 				var promise = new Promise((resolve) => {
-/******/ 					fn = () => (resolve(getResult));
-/******/ 					fn.r = 0;
-/******/ 					var fnQueue = (q) => (q !== queue && !depQueues.has(q) && (depQueues.add(q), q && !q.d && (fn.r++, q.push(fn))));
-/******/ 					currentDeps.map((dep) => (dep[webpackQueues](fnQueue)));
-/******/ 				});
-/******/ 				return fn.r ? promise : getResult();
-/******/ 			}, (err) => ((err ? reject(promise[webpackError] = err) : outerResolve(exports)), resolveQueue(queue)));
-/******/ 			queue && queue.d < 0 && (queue.d = 0);
-/******/ 		};
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
@@ -261,7 +192,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
-/******/ 	var __webpack_exports__ = __webpack_require__("./src/index.js");
+/******/ 	var __webpack_exports__ = __webpack_require__("./public/static/scripts/reName.js");
 /******/ 	
 /******/ })()
 ;

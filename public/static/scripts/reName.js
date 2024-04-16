@@ -23,6 +23,8 @@ console.log('Firebase initialized!')
 
 //init Firestore database
 const db = getFirestore(firebaseApp)
+console.log('Database initialized!')
+
 
 // Function to populate true and false stories
 async function decisionButtons() {

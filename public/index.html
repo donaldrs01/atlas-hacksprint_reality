@@ -4,16 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!--Add firebase/firebase features from provided index.html file that we need-->
-  <script src="https://www.gstatic.com/firebasejs/9.0.1/firebase-app.js" type="module"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.0.1/firebase-firestore.js" type="module"></script>
+  <!-- Add firebase/firebase features from provided index.html file that we need-->
+  <script src="https://www.gstatic.com/firebase/10.10.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js" type="module"></script>
+  <script defer src="https://www.gstatic.com/firebase/init.js?useEmulator=false"></script>
+  
+
   <!--ADD JS bundle -->
+  <!--
   <script type="module" src="./bundle.js"></script>
-  <!--JavaScript file-->
-  <script type="module" src="./static/scripts/reName.js"></script>
+  -->
+
   <!--Import Bootstrap-->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <!--Import style sheets-->a
+  <!--
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+  -->
+  <!--Import style sheets-->
   <link rel="stylesheet" href="./static/styles/main.css">
   <!--Title-->
   <title>Reality Check</title>
@@ -48,8 +55,8 @@
 <!-- Try again button -->
 <button id="tryAgainButton" style="display: none;">Try again?</button>
 
-
-<!--Footer-->
+<script type="module" src="/public/index.js"></script>
+<script type="module" src="./static/scripts/behavior.js"></script>
 
 </body>
 </html>

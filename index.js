@@ -26,22 +26,19 @@ function decisionButtons() {
   // Shuffle the array to randomize the order of stories
   const shuffledStories = shuffleArray(stories);
 
-  // Get references to left and right story containers
+  // Get references to true and false story containers
   const leftContainer = document.getElementById("leftContainer");
   const rightContainer = document.getElementById("rightContainer");
 
-  // Filter true and false stories from the shuffled array
-  const trueStories = shuffledStories.filter(story => story.isTrue);
-  const falseStories = shuffledStories.filter(story => !story.isTrue);
+  // Randomly decide which story to display
+  const randomIndex = Math.random() < 0.5 ? 0 : 1;
+  const trueStoryToDisplay = shuffledStories[randomIndex];
+  const falseStoryToDisplay = shuffledStories[1 - randomIndex];
 
-  // Randomly select one true and one false story
-  const trueStoryToDisplay = trueStories[Math.floor(Math.random() * trueStories.length)];
-  const falseStoryToDisplay = falseStories[Math.floor(Math.random() * falseStories.length)];
-
-  // Display left container
+  // Display true story container
   leftContainer.innerHTML = generateStoryHTML(trueStoryToDisplay);
 
-  // Display right container
+  // Display false story container
   rightContainer.innerHTML = generateStoryHTML(falseStoryToDisplay);
 
   // Hide the start button
@@ -52,8 +49,12 @@ function decisionButtons() {
   rightContainer.style.display = "block";
 
   // Add event listener to story containers
-  leftContainer.addEventListener('click', handleStoryClick);
-  rightContainer.addEventListener('click', handleStoryClick);
+  leftContainer.addEventListener('click', function() {
+    handleStoryClick(trueStoryToDisplay.isTrue);
+  });
+  rightContainer.addEventListener('click', function() {
+    handleStoryClick(falseStoryToDisplay.isTrue);
+  });
 }
 
 // Function to generate HTML for a story
@@ -68,13 +69,21 @@ function generateStoryHTML(story) {
 }
 
 // Function to handle clicks on story containers
-function handleStoryClick() {
+function handleStoryClick(isTrue) {
     // Show the "Try again" button
-    document.getElementById("tryAgainButton").style.display = "block";
+    const tryAgainButton = document.getElementById("tryAgainButton");
+    tryAgainButton.style.display = "block";
+
+    // Display message container
+    const messageContainer = document.getElementById("messageContainer");
+    messageContainer.textContent = isTrue ? "Correct!" : "Incorrect!";
+    messageContainer.style.display = "block";
 
     // Hide the story containers
-    document.getElementById("leftContainer").style.display = "none";
-    document.getElementById("rightContainer").style.display = "none";
+    const leftContainer = document.getElementById("leftContainer");
+    const rightContainer = document.getElementById("rightContainer");
+    leftContainer.style.display = "none";
+    rightContainer.style.display = "none";
 }
 
 // Event listener for the Start Quiz button
@@ -89,6 +98,10 @@ document.getElementById("tryAgainButton").addEventListener("click", function() {
 
   // Hide the "Try again" button
   this.style.display = "none";
+
+  // Hide the message container
+  const messageContainer = document.getElementById("messageContainer");
+  messageContainer.style.display = "none";
 });
 
 // Function to shuffle an array

@@ -6,6 +6,17 @@ body {
   flex-direction: column; /* Stack elements vertically */
 }
 
+/* Header */
+header {
+  text-align: center;
+  margin-bottom: 45px;
+}
+
+header h1 {
+  font-size: 24px;
+  font-family: Arial, Helvetica, sans-serif
+}
+
 /* Buttons */
 #startButton,
 #tryAgainButton {
@@ -51,4 +62,10 @@ body {
   font-size: 24px;
   text-align: center;
   margin-bottom: 20px; /* Add some margin to separate from try again button */
+}
+
+#sourceText {
+  margin-top: 10px;
+  font-size: 16px;
+  text-align: right;
 }

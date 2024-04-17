@@ -11,7 +11,8 @@ function fetchStories() {
         const story = {
           title: item.headline,
           isTrue: item["true or false"],
-          source: item.source
+          source: item.source,
+          content: item.content
         };
         stories.push(story);
       });
@@ -67,12 +68,12 @@ function decisionButtons() {
 
 }
 
-// Function to generate HTML for a story
 function generateStoryHTML(story) {
   return `
       <div class="card">
           <div class="card-body">
               <h5 class="card-title">${story.title}</h5>
+              <p class="card-text">${story.content}</p> <!-- Add content here -->
           </div>
       </div>
   `;

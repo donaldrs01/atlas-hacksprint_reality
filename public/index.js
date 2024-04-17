@@ -88,7 +88,7 @@ function handleStoryClick(isTrue, story) {
     // Display message container
     const messageContainer = document.getElementById("messageContainer");
     const message = isTrue ? "Correct!" : "Incorrect!";
-    const source = story.source ? `This story came from ${story.source}` : "";
+    const source = story.source ? `This headline came from ${story.source}` : "";
     messageContainer.textContent = `${message} ${source}`;
     messageContainer.style.display = "block";
 

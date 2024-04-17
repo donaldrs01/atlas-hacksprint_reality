@@ -12,7 +12,7 @@ Reality Check is very simple, and easy to play. Click the link, and hit the star
 ## Example
 Start Page
 <img src="example1.png"
-     alt="Start Page" />
+     alt="example1" />
 After clicking "Start" you should be taken to the quiz!
 <img src="example2.png"
      alt="Quiz Page" />

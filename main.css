@@ -4,6 +4,8 @@ body {
   align-items: center;
   min-height: 100vh;
   flex-direction: column; /* Stack elements vertically */
+  background-color: #01ccff;
+  background-image: linear-gradient(to bottom, #01ccff, #bdbebe);
 }
 
 /* Header */

@@ -8,14 +8,17 @@ body {
   background-image: linear-gradient(to bottom, #01ccff, #bdbebe);
 }
 
-/* Header */
 header {
   text-align: center;
-  margin-bottom: 45px;
+  margin-bottom: 60px;
+  background-color: #043074;
+  padding: 20px;
+  border-radius: 20px;
+  color: #fff;
 }
 
 header h1 {
-  font-size: 24px;
+  font-size: 32px;
   font-family: Arial, Helvetica, sans-serif
 }
 

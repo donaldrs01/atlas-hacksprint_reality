@@ -21,3 +21,6 @@ The project dealine was only a week, we ran into some issues but were able to ge
 * Make the game more challenging; using a API or LLM to generate news stories with more detail to create more believability to the fake stories.
 
 ## Authors
+Jessica Dison - [GitHub](https://github.com/jessasesh)
+Ryan Donaldson - [GitHub](https://github.com/donaldrs01)
+Luke Schula - [GitHub](https://github.com/lukeschula)

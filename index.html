@@ -9,7 +9,7 @@
   <!--Import Bootstrap-->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <!--Import style sheets-->
-  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="./main.css">
   <!--Title-->
   <title>Reality Check</title>
 
@@ -18,27 +18,30 @@
 <body>
 
 <!--Header-->
-  <header>
-    <div>
-
-    </div>
-  </header>
+<header id="mainHeader" style="display: none;">
+  <div>
+    <h1>Which news headline is real?</h1>
+  </div>
+</header>
 
 <!--Main Content-->
-  
+
 <!--Container for stories -->
 <div id="decisionButtons" class="container">
   <div class="row">
-      <!--True Story Container-->
-      <div id="leftContainer" class="col-md-6"></div>
+    <!--True Story Container-->
+    <div id="leftContainer" class="col-md-6"></div>
 
-      <!--False Story Container-->
-      <div id="rightContainer" class="col-md-6"></div>
+    <!--False Story Container-->
+    <div id="rightContainer" class="col-md-6"></div>
   </div>
 </div>
 
 <!-- Message Container -->
-<div id="messageContainer" style="display: none;"></div>
+<div id="messageContainer" style="display: none;">
+  <div id="messageText"></div>
+  <div id="sourceText"></div>
+</div>
 
 <!--Start Button-->
 <button id="startButton" class="start-button">Start Quiz</button>
@@ -47,7 +50,7 @@
 <button id="tryAgainButton" style="display: none;">Try again?</button>
 
 <!--JavaScript file-->
-<script src="index.js"></script>
+<script src="./index.js"></script>
 
 <!--Footer-->
 

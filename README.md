@@ -1,4 +1,4 @@
-![Screenshot of App](/images/check.png)
+![Screenshot of App](/images/screenshot.png)
 
 # Reality Check - Seperating Fact from Fiction
 Reality Check is game where you test your skills in deciphering real news stories from fake clickbait headlines.
